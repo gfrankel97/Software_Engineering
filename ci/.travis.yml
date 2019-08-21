@@ -1,7 +1,12 @@
+
+dist: trusty
+
+sudo: required
+
 services:
   - docker
 
-before_install:
+script:
   - echo Docker Tag: $TRAVIS_JOB_ID
   - docker build -t gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID .
   - docker push gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID
