@@ -3,4 +3,5 @@ services:
 
 before_install:
   - echo Docker Tag: $TRAVIS_JOB_ID
-  - docker build -t gfrankel/cecs550-software-engineering: .
+  - docker build -t gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID .
+  - docker push gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID
