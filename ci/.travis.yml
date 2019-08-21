@@ -1,0 +1,6 @@
+services:
+  - docker
+
+before_install:
+  - echo Docker Tag: $TRAVIS_JOB_ID
+  - docker build -t gfrankel/cecs550-software-engineering: .
