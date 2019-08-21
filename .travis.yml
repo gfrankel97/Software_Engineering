@@ -5,15 +5,10 @@ language: python
 services:
   - docker
 
-
-# before_script:
-#   - echo Docker Tag: $TRAVIS_JOB_ID
-
 before_install:
-  - docker build -t gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID source
-# script:
-#   - echo Docker Tag: $TRAVIS_JOB_ID
-#   - cd source
-#   - docker build -t gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID .
-#   - docker push gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID
-#   provider: script
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t "$DOCKER_USERNAME"/cecs550-software-engineering:$TRAVIS_BUILD_NUMBER source
+
+after_success:
+  - docker push "$DOCKER_USERNAME"/cecs550-software-engineering:$TRAVIS_BUILD_NUMBER
+
