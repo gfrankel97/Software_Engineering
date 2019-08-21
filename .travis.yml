@@ -6,6 +6,8 @@ services:
   - docker
 
 script:
+  provider: script
   - echo Docker Tag: $TRAVIS_JOB_ID
+  - cd source
   - docker build -t gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID .
   - docker push gfrankel/cecs550-software-engineering:$TRAVIS_JOB_ID
