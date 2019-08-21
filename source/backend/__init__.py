@@ -12,7 +12,7 @@ CORS(app)
 #serve static files
 @app.route('/<path:path>', methods=['GET'])
 def static_proxy(path):
-    return send_from_directory(os.path.join(root_dir, 'backend', 'templates', 'html'), path)
+    return send_from_directory(os.path.abspath('/app/backend/templates/html'), path)
 
 
 @app.route('/')
