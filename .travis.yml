@@ -7,8 +7,8 @@ services:
 
 before_install:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker build -t "$DOCKER_USERNAME"/cecs550-software-engineering:$TRAVIS_BUILD_NUMBER source
+  - docker build -t "$DOCKER_USERNAME"/cecs550-software-engineering:v$TRAVIS_BUILD_NUMBER -t "$DOCKER_USERNAME"/cecs550-software-engineering:latest source
 
 after_success:
-  - docker push "$DOCKER_USERNAME"/cecs550-software-engineering:$TRAVIS_BUILD_NUMBER
+  - docker push "$DOCKER_USERNAME"/cecs550-software-engineering:v$TRAVIS_BUILD_NUMBER
 
