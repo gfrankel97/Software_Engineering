@@ -6,7 +6,7 @@ resource "azurerm_app_service" "dockSoftwareEngineering" {
   app_service_plan_id = azurerm_app_service_plan.aspSoftwareEngineering.id
 
   site_config {
-    linux_fx_version = "DOCKER|gfrankel/cecs550-software-engineering:9"
+    linux_fx_version = "DOCKER|gfrankel/cecs550-software-engineering"
 
     use_32_bit_worker_process = true
   }
