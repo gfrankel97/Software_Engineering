@@ -3,8 +3,9 @@
 ## Infrastructure
 * Using Microsoft Azure for hosting
 * Haven't found a way to share access to the team
-* Terraform was chosen for infrastructure as code
+* Terraform was chosen for infrastructure as code for simplicity and familiarity
     * Infrastructure as code gives us disaster recovery, in the case that our infrastructure gets wiped out.
+    * This also detects drift, or configuration changes made to the infrastructure outside of Terraform
 
 ## CI/CD (Continuous Integration / Continuous Deployment)
 * Using [Travis CI](https://travis-ci.com/) to build and deploy our code.
@@ -38,5 +39,6 @@
 ## Frontend
 * Using Angular
 * [Angular Docs](https://angular.io/docs)
+* `source/frontend` is the file path to the frontend code.
 
 
