@@ -15,7 +15,7 @@ after_success:
 deploy:
   - provider: script
     script:
-      curl -sL https://aka.ms/InstallAzureCLIDeb | bash;
+      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash;
       az login --service-principal -u "$AZURE_SERVICE_PRINCIPAL_CLIENT_ID" -p "$AZURE_SERVICE_PRINCIPAL_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID";
       az account set -s "Azure for Students Starter";
       az webapp config container set --docker-custom-image-name gfrankel/cecs550-software-engineering:v$TRAVIS_BUILD_NUMBER --resource-group rgSoftwareEngineering --name pantry-to-table
