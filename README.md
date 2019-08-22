@@ -2,7 +2,6 @@
 
 ## Infrastructure
 * Using Microsoft Azure for hosting
-* Haven't found a way to share access to the team
 * Terraform was chosen for infrastructure as code for simplicity and familiarity
     * Infrastructure as code gives us disaster recovery, in the case that our infrastructure gets wiped out.
     * This also detects drift, or configuration changes made to the infrastructure outside of Terraform
