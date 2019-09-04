@@ -5,13 +5,13 @@ resource "azurerm_app_service_plan" "aspSoftwareEngineering" {
 
   kind                = "Linux"
   reserved            = true
-  resource_group_name = "rgSoftwareEngineering"
+  resource_group_name = "rgPantryToTable"
 
   sku {
     tier = "Free"
     size = "F1"
   }
 
-  depends_on = [ azurerm_resource_group.rgSoftwareEngineering ]
+  depends_on = [ azurerm_resource_group.rgPantryToTable ]
 }
 

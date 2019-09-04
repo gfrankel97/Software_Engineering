@@ -2,7 +2,7 @@ resource "azurerm_app_service" "dockSoftwareEngineering" {
   name     = "pantry-to-table"
   location = "East US"
 
-  resource_group_name = "rgSoftwareEngineering"
+  resource_group_name = "rgPantryToTable"
   app_service_plan_id = azurerm_app_service_plan.aspSoftwareEngineering.id
 
   site_config {
@@ -16,7 +16,7 @@ resource "azurerm_app_service" "dockSoftwareEngineering" {
   }
 
   depends_on = [
-    azurerm_resource_group.rgSoftwareEngineering,
+    azurerm_resource_group.rgPantryToTable,
     azurerm_app_service_plan.aspSoftwareEngineering,
   ]
 }
