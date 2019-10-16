@@ -1,21 +1,112 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- Module for search material -->
+<mat-card class="ingredientModule">
+  <mat-card style="margin: 5px">
 
-<router-outlet></router-outlet>
+    <!-- search bar -->
+    <mat-form-field style="margin-top: -3px;margin-bottom: -20px; width: 21%; margin-left: 1%;">
+      <input
+        matInput
+        type="text"
+        placeholder="Search Ingredients"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        mat-button
+        *ngIf="searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="onClearSearchValue()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="Search For Ingredient"
+        (click)="onSearchIngredient(searchValue)"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- select meal type -->
+    <mat-form-field style="margin-top: -3px;margin-bottom: -20px;margin-left: 2.5%;width: 15%;">
+      <mat-select placeholder="Select Meal Type">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- prep time slider -->
+    <mat-card-content style="display: inline-block; font-size: 16px; width: 20%; margin-left: 2%; margin-bottom: -4px;">
+      Max Prep Time: 
+      <mat-slider min="5" max="120" step="5" thumbLabel (value)="maxPrepTime" style="width: 51%; margin-left: 2%;"> </mat-slider>
+    </mat-card-content>
+    
+    <!-- selected ingredients dropdown
+    <mat-form-field style="margin-top: -3px;margin-bottom: -20px;margin-left: 1%;width: 18%;">
+      <mat-select placeholder="Selected Ingredients" (click)="test()">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+<!-- 
+    <mat-form-field style="margin-top: -3px;margin-bottom: -20px;margin-left: 1%;width: 18%;">
+      <mat-label>Selected Ingredients</mat-label>
+      <mat-select (click)="onSelectedIngredients()">
+        <mat-option *ngFor="let ingredient of cloneIngredients" disabled>
+          <mat-checkbox [(ngModel)]="ingredient.selected"> </mat-checkbox>
+          {{ ingredient.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <mat-card style="margin-left: 1%; width: 17%; display: inline-block; align-content: center;">
+      <mat-checkbox (click)="onSelectedIngredients()"></mat-checkbox>
+      Show Selected Ingredients
+    </mat-card>
+
+    <!-- search for recipe button -->
+    <button mat-raised-button (click)="onRecipeSearch()" style="COLOR: BLACK; BACKGROUND-COLOR: SKYBLUE; FONT-SIZE: 22px; margin-left: 2%;width: 16.5%;">
+      Find My Recipe!
+      <mat-icon>fastfood</mat-icon>
+    </button>
+  </mat-card>
+
+  <!-- <mat-list>
+    <mat-list-item *ngFor="let ingredient of ingredients">
+      <mat-checkbox [(ngModel)]="ingredient.selected"> </mat-checkbox>
+      <h4 mat-line>{{ ingredient.name }}</h4>
+    </mat-list-item>
+  </mat-list> -->
+  <div class="ingredientList">
+    <mat-grid-list cols="8" rowHeight="4:1">
+      <mat-grid-tile *ngFor="let ingredient of cloneIngredients">
+        <mat-card class="ingredient">
+          <mat-checkbox [(ngModel)]="ingredient.selected"> </mat-checkbox>
+          {{ ingredient.name }}
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</mat-card>
+
+<!-- Module for search results -->
+<mat-card style="margin: 10px 10px; min-height: 63%;">
+  <!-- <mat-card class="recipe" *ngFor="let recipe of recipes" (click)="test()">
+    {{ recipe }}
+  </mat-card> -->
+
+  <mat-grid-list cols="4" rowHeight="4:1">
+      <mat-grid-tile *ngFor="let recipe of recipes">
+        <mat-card class="recipe">
+          <h5 style="font-size: 17px;font-weight: 500;margin-bottom: 16px !important;margin: 5px;">
+            {{ recipe.name }}
+          </h5>
+          <footer style="text-align: end;">
+            Prep Time: {{ recipe.prepTime }} minutes
+          </footer>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>
