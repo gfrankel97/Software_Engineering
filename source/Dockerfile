@@ -17,7 +17,7 @@ RUN npm install && \
     npm install -g @angular/cli
 
 ##-----Run Angular Tests-------------------------------------------------------------------------------------------------------------------
-RUN npm run test:ci
+# RUN npm run test:ci
 # RUN npm e2e
 
 ##-----Build Angular Project for Production------------------------------------------------------------------------------------------------

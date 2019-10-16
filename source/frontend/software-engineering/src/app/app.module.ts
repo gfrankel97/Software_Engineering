@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule, 
-          MatInputModule, MatButtonModule, 
+import { MatCardModule, MatFormFieldModule,
+          MatInputModule, MatButtonModule,
           MatIconModule, MatListModule, MatGridListModule,
           MatCheckboxModule, MatOptionModule,
           MatSelectModule, MatSliderModule } from '@angular/material';
@@ -28,8 +28,9 @@ import { MatCardModule, MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
     MatSliderModule,
+    MatIconModule,
 
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
 
     BrowserModule,
