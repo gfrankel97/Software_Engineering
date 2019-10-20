@@ -10,11 +10,15 @@ import { MatCardModule, MatFormFieldModule,
           MatInputModule, MatButtonModule, 
           MatIconModule, MatListModule, MatGridListModule,
           MatCheckboxModule, MatOptionModule,
-          MatSelectModule, MatSliderModule } from '@angular/material';
+          MatSelectModule, MatSliderModule,
+          MatDialogModule } from '@angular/material';
+
+import { RecipeDialogComponent } from './components/recipe-dialog/recipe-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecipeDialogComponent
   ],
   imports: [
     MatCardModule,
@@ -28,6 +32,7 @@ import { MatCardModule, MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
     MatSliderModule,
+    MatDialogModule,
 
     FormsModule, 
     ReactiveFormsModule,
@@ -35,6 +40,9 @@ import { MatCardModule, MatFormFieldModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
+  ],
+  entryComponents: [
+    RecipeDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

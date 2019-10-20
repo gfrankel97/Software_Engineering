@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeDialogComponent } from './components/recipe-dialog/recipe-dialog.component';
 
 //models
 import { Ingredient } from './core/model/ingredient';
 import { RecipeResult } from './core/model/recipeResult';
+import { MatDialog } from '@angular/material';
+import { Recipe } from './core/model/recipe';
 
 @Component({
   selector: 'app-root',
@@ -22,14 +25,20 @@ export class AppComponent implements OnInit {
   selectedIngredients: Ingredient[];
   isOnlyShowSelected: boolean = false;
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.getIngredients();
+  }
 
-    //shouldnt be in here - only used in testing without real data
-    this.getRecipes();
+  animal: string;
+  name: string;
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(recipe: RecipeResult): void {
+    console.log(recipe);
+    this.dialog.open(RecipeDialogComponent, {
+      data: { id: recipe.id, name: recipe.name, prepTime: recipe.prepTime }
+    });
   }
 
   test() {
@@ -44,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   onRecipeSearch() {
-    console.log(this.cloneIngredients);
+    this.getRecipes();
   }
 
   onSearchIngredient(searchValue: string) {

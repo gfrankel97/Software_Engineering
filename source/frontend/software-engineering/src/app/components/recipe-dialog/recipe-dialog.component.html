@@ -1,0 +1,47 @@
+<h1 mat-dialog-title class="heading" id="betterFont" style="font-weight: 700; font-size: 28px; padding-left: 1%; padding-top: 1%; margin-bottom: 3px">{{recipe.name}}</h1>
+<h2 mat-dialog-title class="heading" id="betterFont" style="padding-left: 1% ">Preperation Time: {{recipe.prepTime}} minutes</h2>
+
+  <h3 class="heading" id="betterFont" style="padding-left: 1%; margin-bottom: 5px; text-decoration: underline;">Ingredients</h3>
+  <mat-list role="list" id="betterFont" style="
+  display: inline-block;
+  width: 40%;
+  height: 75% !important;
+  padding-left: 1%
+  ">
+      <mat-list-item role="listitem">
+            Ingredient 1
+        </mat-list-item>
+      <mat-list-item role="listitem">
+            Ingredient 2
+        </mat-list-item>
+      <mat-list-item role="listitem">Ingredient 3</mat-list-item>
+  </mat-list> 
+
+<!-- steps side of the dialog -->
+<div mat-dialog-content style="
+position: absolute;
+left: 45%;
+top: 62px;
+height: 83% !important;
+max-height: 83% !important;
+border-left-style: dotted;
+border-left-width: 8px;
+padding-left: 4%;
+border-color: skyblue;
+">
+    <h3 class="heading" id="betterFont" style="margin-top: 17px; margin-bottom: 5px; text-decoration: underline;">Steps</h3>
+    <mat-list role="list">
+        <mat-list-item role="listitem">Item 1</mat-list-item>
+        <mat-list-item role="listitem">Item 2</mat-list-item>
+        <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-list>          
+</div>
+
+<mat-dialog-actions style="
+position: absolute;
+right: 47px;
+top: 32px;">
+<button mat-button mat-dialog-close mat-icon-button aria-label="Exit">
+    <mat-icon>close</mat-icon>
+    </button>
+</mat-dialog-actions>

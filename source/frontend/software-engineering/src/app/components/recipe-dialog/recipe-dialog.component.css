@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+.heading {
+    font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    height: 42px
+}
+
+#betterFont {
+    font-family: 'Open Sans', sans-serif;
+}

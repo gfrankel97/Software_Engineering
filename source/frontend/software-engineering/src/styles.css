@@ -2,9 +2,22 @@
 
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100%;
+    background-color: #d9d9d9;
+} 
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
 .mat-card {
     padding: 10px !important;
+}
+
+.cdk-overlay-pane {
+    height: 90% !important;
+    width: 95% !important;
+    max-width: 95% !important;
 }
