@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 
+import Data_Access as access
 
 
 app = Flask(__name__)
