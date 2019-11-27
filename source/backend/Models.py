@@ -41,22 +41,16 @@ class User(Base):
 class Recipe(Base):
 	__tablename__ = 'recipe'
 	name = Column(String, primary_key=True)
-	description = Column(String)
 	instructions = Column(String)
-	picture = Column(String)
 	mealtype = Column(String)
-	servingsize = Column(Integer)
 	timetocompletion = Column(Integer)
 	ingredients = relationship("Ingredient", secondary=recipe_ingredient_table)
 	
 	def to_dict(self):
 		toReturn = {
 			"name":self.name,
-			"description":self.description,
 			"steps":self.instructions,
-			"picture":self.picture,
 			"mealtype":self.mealtype,
-			"servingsize":self.servingsize,
 			"prepTime":self.timetocompletion
 		}
 		ingredientsList = []
@@ -64,6 +58,13 @@ class Recipe(Base):
 			ingredientsList.append(ingredient.to_str())
 		toReturn["ingredients"] = ingredientsList
 		return toReturn
+	
+	def searchresult_dict(self):
+		return {
+			"name":self.name,
+			"mealtype":self.mealtype,
+			"prepTime":self.timetocompletion
+		}
 
 #Create the tables in the db
 base_metadata = Base.metadata

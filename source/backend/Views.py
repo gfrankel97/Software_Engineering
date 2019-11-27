@@ -45,11 +45,8 @@ def CreateIngredient(session, _name):
 def CreateRecipe(session, recipe):
     new_recipe = Recipe(
         name = recipe["name"],
-        description=recipe["description"],
         instructions=recipe["steps"],
-        picture=recipe["picture"],
         mealtype=recipe["mealtype"],
-        servingsize=recipe["servingsize"],
         timetocompletion=recipe["prepTime"],
         ingredients=[]
     )
@@ -123,7 +120,7 @@ def GetUserIngredients(session, username):
 #        ingredients - list of strings
 #    optional:
 #        meal type - string
-#        time_to_completion - integer
+#        prep_time - integer
 #output - list of recipe dictionaries
 def GetRecipes(session, ingredients, meal_type, prep_time):
     recipes_with_ingredients = []
@@ -143,7 +140,7 @@ def GetRecipes(session, ingredients, meal_type, prep_time):
                     recipe_is_included = False
                     break
             if (recipe_is_included):
-                recipes_with_ingredients.append(recipe_dict)
+                recipes_with_ingredients.append(recipe.searchresult_dict())
     except Exception as exception:
         session.rollback()
         ex_str = exception.__str__()
@@ -152,3 +149,18 @@ def GetRecipes(session, ingredients, meal_type, prep_time):
         return ex_str
     else:
         return recipes_with_ingredients
+
+#Get recipe by name
+#recipeName - recipe name (string)
+#output - recipe (dict)
+def GetRecipe(session, recipeName):
+    return session.query(Recipe).filter(name == recipeName).first().to_dict()
+
+#Get all meal types
+#output - list of meal types (strings)
+def GetMealTypes(session):
+    mealtypes = session.query(Recipe.mealtype).distinct().all()
+    to_return = []
+    for mealtype in mealtypes:
+        to_return.append(mealtype[0])
+    return to_return

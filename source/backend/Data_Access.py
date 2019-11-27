@@ -95,11 +95,8 @@ def CreateIngredients(session, request):
 def CreateRecipe(session, request):
     requiredfields = {
         "name":str,
-        "description":str,
         "steps":str,
-        "picture":str,
         "mealtype":str,
-        "servingsize":int,
         "prepTime":int,
         "ingredients":list,
     }
@@ -154,3 +151,18 @@ def GetRecipes(session, request):
     return view.GetRecipes(session, request["ingredients"], \
         request["meal_type"] if "meal_type" in request else None, \
         request["prepTime"] if "prepTime" in request else None)
+
+#Get recipe by name
+#output - recipe (dict)
+def GetRecipe(session, request):
+    requiredfields = {
+        "name":str,
+    }
+    if not CheckRequestFormat(request, requiredfields, optionalfields):
+        return {"Error": FormatErrorMessage(requiredfields, optionalfields)}
+    return view.GetRecipe(session, request["name"])
+
+#Get all meal types
+#output - list of meal types (strings)
+def GetMealTypes(session):
+    return view.GetMealTypes(session)

@@ -20,5 +20,21 @@ def static_proxy(path):
 def app_entrypoint():
     return render_template('app.jinja2')
 
+@app.route('/GetAllIngredients')
+def app_entrypoint():
+    return access.GetAllIngredients(session)
+
+@app.route('/GetAllMealTypes')
+def app_entrypoint():
+    return access.GetMealTypes(session)
+
+@app.route('/GetRecipeByFilter')
+def app_entrypoint():
+    return access.GetRecipes(session, request)
+
+@app.route('/GetRecipeById')
+def app_entrypoint():
+    return access.GetRecipe(session, request)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

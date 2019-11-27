@@ -16,11 +16,8 @@ access.CreateRecipe(session, {
 		"ingredient_two",
 		"ingredient_three"
 	],
-	"description":"description",
 	"steps":"instructions",
-	"picture":"picture",
 	"mealtype":"mealtype_one",
-	"servingsize":2,
 	"prepTime":1,
 })
 access.CreateRecipe(session, {
@@ -29,11 +26,8 @@ access.CreateRecipe(session, {
 		"ingredient_three",
 		"ingredient_four"
 	],
-	"description":"description",
 	"steps":"instructions",
-	"picture":"picture",
 	"mealtype":"mealtype_two",
-	"servingsize":2,
 	"prepTime":2,
 })
 access.CreateRecipe(session, {
@@ -42,11 +36,8 @@ access.CreateRecipe(session, {
 		"ingredient_four",
 		"ingredient_five"
 	],
-	"description":"description",
 	"steps":"instructions",
-	"picture":"picture",
 	"mealtype":"mealtype_two",
-	"servingsize":2,
 	"prepTime":3,
 })
 access.CreateRecipe(session, {
@@ -56,11 +47,8 @@ access.CreateRecipe(session, {
 		"ingredient_two",
 		"ingredient_three"
 	],
-	"description":"description",
 	"steps":"instructions",
-	"picture":"picture",
 	"mealtype":"mealtype_one",
-	"servingsize":2,
 	"prepTime":2,
 })
 
@@ -162,3 +150,6 @@ recipes_with_ingredients = access.GetRecipes(session, {
 	})
 print(len(recipes_with_ingredients) == 1)
 
+print("\nMEAL TYPES TEST")
+meal_types = access.GetMealTypes(session)
+print(len(meal_types) == 2)
