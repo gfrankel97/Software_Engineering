@@ -10,47 +10,48 @@ access.CreateIngredient(session, {"name": "ingredient_three"})
 access.CreateIngredient(session, {"name": "ingredient_four"})
 
 access.CreateRecipe(session, {
-	"name":"recipe_one",
-	"ingredients": [
+	"RecipeName":"recipe_one",
+	"Ingredients": [
 		"ingredient_one",
 		"ingredient_two",
 		"ingredient_three"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_one",
-	"prepTime":1,
+	"MealType":"MealType_one",
+	"PrepTime":1,
 })
 access.CreateRecipe(session, {
-	"name":"recipe_two",
-	"ingredients": [
+	"RecipeName":"recipe_two",
+	"Ingredients": [
 		"ingredient_three",
 		"ingredient_four"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_two",
-	"prepTime":2,
+	"MealType":"MealType_two",
+	"PrepTime":1,
 })
 access.CreateRecipe(session, {
-	"name":"recipe_three",
-	"ingredients": [
+	"RecipeName":"recipe_three",
+	"Ingredients": [
 		"ingredient_four",
 		"ingredient_five"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_two",
-	"prepTime":3,
+	"MealType":"MealType_one",
+	"PrepTime":3,
 })
 access.CreateRecipe(session, {
-	"name":"recipe_four",
-	"ingredients": [
+	"RecipeName":"recipe_four",
+	"Ingredients": [
 		"ingredient_one",
 		"ingredient_two",
 		"ingredient_three"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_one",
-	"prepTime":2,
+	"MealType":"MealType_one",
+	"PrepTime":2,
 })
+
 
 
 #create user fails tests
@@ -106,12 +107,12 @@ print("Get users ingredients test")
 user_ingredients = access.GetUserIngredients(session, {"username": "user_one"})
 print(len(user_ingredients) == 0)
 print("Reset/Get users ingredients test")
-access.GetRecipes(session, {"username":"user_one", "ingredients":["ingredient_one", "ingredient_four"]})
+access.GetRecipes(session, {"username":"user_one", "Ingredients":["ingredient_one", "ingredient_four"]})
 user_ingredients = access.GetUserIngredients(session, {"username":"user_one"})
 print(len(user_ingredients) == 2)
 
 print("Overwrite/Get users ingredients test")
-access.GetRecipes(session, {"username":"user_one", "ingredients":["ingredient_three"]})
+access.GetRecipes(session, {"username":"user_one", "Ingredients":["ingredient_three"]})
 user_ingredients = access.GetUserIngredients(session, {"username":"user_one"})
 print(len(user_ingredients) == 1)
 
@@ -119,37 +120,37 @@ print(len(user_ingredients) == 1)
 #recipe get tests
 print("\n\nRECIPE INGREDIENT TESTS\n")
 print("Get recipe by ingredients test")
-recipes_with_ingredients = access.GetRecipes(session, {"ingredients": ["ingredient_three", "ingredient_four"]})
+recipes_with_ingredients = access.GetRecipes(session, {"Ingredients": ["ingredient_three", "ingredient_four"]})
 print(len(recipes_with_ingredients) == 1)
 print("Get multiple recipes by ingredients test")
-recipes_with_ingredients = access.GetRecipes(session, {"ingredients":["ingredient_three","ingredient_four","ingredient_five"]})
+recipes_with_ingredients = access.GetRecipes(session, {"Ingredients":["ingredient_three","ingredient_four","ingredient_five"]})
 print(len(recipes_with_ingredients) == 2)
 print("Get no recipes by ingredients test")
-recipes_with_ingredients = access.GetRecipes(session, {"ingredients":["ingredient_one"]})
+recipes_with_ingredients = access.GetRecipes(session, {"Ingredients":["ingredient_one"]})
 print(len(recipes_with_ingredients) == 0)
 
 print("Get recipe by meal type test")
 recipes_with_ingredients = access.GetRecipes(session, {
-	"ingredients": ["ingredient_three","ingredient_four","ingredient_five"],
-	"meal_type": "mealtype_two"
+	"Ingredients": ["ingredient_three","ingredient_four","ingredient_five"],
+	"MealType": "MealType_two"
 	})
-print(len(recipes_with_ingredients) == 2)
+print(len(recipes_with_ingredients) == 1)
 
 print("Get recipe by completion time test")
 recipes_with_ingredients = access.GetRecipes(session, {
-	"ingredients": ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four","ingredient_five"],
-	"prepTime": 2
+	"Ingredients": ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four","ingredient_five"],
+	"MaxPrepTime": 2
 	})
 print(len(recipes_with_ingredients) == 3)
 
 print("Get recipe by all criteria test")
 recipes_with_ingredients = access.GetRecipes(session, {
-	"ingredients": ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four"],
-	"meal_type": "mealtype_one",
-	"prepTime": 1
+	"Ingredients": ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four"],
+	"MealType": "MealType_one",
+	"MaxPrepTime": 1
 	})
 print(len(recipes_with_ingredients) == 1)
 
 print("\nMEAL TYPES TEST")
-meal_types = access.GetMealTypes(session)
-print(len(meal_types) == 2)
+MealTypes = access.GetMealTypes(session)
+print(len(MealTypes) == 2)

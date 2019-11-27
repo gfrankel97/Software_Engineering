@@ -10,46 +10,46 @@ view.CreateIngredient(session, "ingredient_three")
 view.CreateIngredient(session, "ingredient_four")
 
 view.CreateRecipe(session, {
-	"name":"recipe_one",
-	"ingredients": [
+	"RecipeName":"recipe_one",
+	"Ingredients": [
 		"ingredient_one",
 		"ingredient_two",
 		"ingredient_three"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_one",
-	"prepTime":1,
+	"MealType":"MealType_one",
+	"PrepTime":1,
 })
 view.CreateRecipe(session, {
-	"name":"recipe_two",
-	"ingredients": [
+	"RecipeName":"recipe_two",
+	"Ingredients": [
 		"ingredient_three",
 		"ingredient_four"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_two",
-	"prepTime":1,
+	"MealType":"MealType_two",
+	"PrepTime":1,
 })
 view.CreateRecipe(session, {
-	"name":"recipe_three",
-	"ingredients": [
+	"RecipeName":"recipe_three",
+	"Ingredients": [
 		"ingredient_four",
 		"ingredient_five"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_two",
-	"prepTime":3,
+	"MealType":"MealType_one",
+	"PrepTime":3,
 })
 view.CreateRecipe(session, {
-	"name":"recipe_four",
-	"ingredients": [
+	"RecipeName":"recipe_four",
+	"Ingredients": [
 		"ingredient_one",
 		"ingredient_two",
 		"ingredient_three"
 	],
 	"steps":"instructions",
-	"mealtype":"mealtype_one",
-	"prepTime":2,
+	"MealType":"MealType_one",
+	"PrepTime":2,
 })
 
 #login tests
@@ -92,15 +92,15 @@ recipes_with_ingredients = view.GetRecipes(session, ["ingredient_one"], None, No
 print(len(recipes_with_ingredients) == 0)
 
 print("Get recipe by meal type test")
-recipes_with_ingredients = view.GetRecipes(session, ["ingredient_three","ingredient_four","ingredient_five"], "mealtype_two", None)
-print(len(recipes_with_ingredients) == 2)
+recipes_with_ingredients = view.GetRecipes(session, ["ingredient_three","ingredient_four","ingredient_five"], "MealType_two", None)
+print(len(recipes_with_ingredients) == 1)
 
 print("Get recipe by completion time test")
 recipes_with_ingredients = view.GetRecipes(session, ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four","ingredient_five"], None, 2)
 print(len(recipes_with_ingredients) == 3)
 
 print("Get recipe by all criteria test")
-recipes_with_ingredients = view.GetRecipes(session, ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four"], "mealtype_one", 1)
+recipes_with_ingredients = view.GetRecipes(session, ["ingredient_one", "ingredient_two", "ingredient_three","ingredient_four"], "MealType_one", 1)
 print(len(recipes_with_ingredients) == 1)
 
 print("\nMEAL TYPES TEST")

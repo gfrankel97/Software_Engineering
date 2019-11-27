@@ -44,14 +44,14 @@ def CreateIngredient(session, _name):
 #output - new recipe - Recipe Model
 def CreateRecipe(session, recipe):
     new_recipe = Recipe(
-        name = recipe["name"],
+        name = recipe["RecipeName"],
         instructions=recipe["steps"],
-        mealtype=recipe["mealtype"],
-        timetocompletion=recipe["prepTime"],
-        ingredients=[]
+        MealType=recipe["MealType"],
+        PrepTime=recipe["PrepTime"],
+        Ingredients=[]
     )
-    for ingredientName in recipe["ingredients"]:
-        new_recipe.ingredients.append(GetIngredientByName(session, ingredientName))
+    for ingredientName in recipe["Ingredients"]:
+        new_recipe.Ingredients.append(GetIngredientByName(session, ingredientName))
     session.add(new_recipe)
     return SafeCommit(session, new_recipe)
 
@@ -128,14 +128,14 @@ def GetRecipes(session, ingredients, meal_type, prep_time):
     try:
         recipes = session.query(Recipe)
         if meal_type is not None:
-            recipes = recipes.filter(Recipe.mealtype == meal_type)
+            recipes = recipes.filter(Recipe.MealType == meal_type)
         if prep_time is not None:
-            recipes = recipes.filter(Recipe.timetocompletion <= prep_time)
+            recipes = recipes.filter(Recipe.PrepTime <= prep_time)
         recipes = recipes.all()
         for recipe in recipes:
             recipe_is_included = True
             recipe_dict = recipe.to_dict()
-            for ingredient in recipe_dict["ingredients"]:
+            for ingredient in recipe_dict["Ingredients"]:
                 if ingredient not in ingredients:
                     recipe_is_included = False
                     break
@@ -159,7 +159,7 @@ def GetRecipe(session, recipeName):
 #Get all meal types
 #output - list of meal types (strings)
 def GetMealTypes(session):
-    mealtypes = session.query(Recipe.mealtype).distinct().all()
+    mealtypes = session.query(Recipe.MealType).distinct().all()
     to_return = []
     for mealtype in mealtypes:
         to_return.append(mealtype[0])

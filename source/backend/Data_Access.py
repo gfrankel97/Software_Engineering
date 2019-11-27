@@ -94,11 +94,11 @@ def CreateIngredients(session, request):
 #output - new recipe - dict
 def CreateRecipe(session, request):
     requiredfields = {
-        "name":str,
+        "RecipeName":str,
         "steps":str,
-        "mealtype":str,
-        "prepTime":int,
-        "ingredients":list,
+        "MealType":str,
+        "PrepTime":int,
+        "Ingredients":list,
     }
     if not CheckRequestFormat(request, requiredfields, None):
         return {"Error": FormatErrorMessage(requiredfields, None)}
@@ -137,26 +137,26 @@ def GetUserIngredients(session, request):
 #output - list of recipes (dictionaries)
 def GetRecipes(session, request):
     requiredfields = {
-        "ingredients":list,
+        "Ingredients":list,
     }
     optionalfields = {
         "username":str,
-        "meal_type":str,
-        "prepTime":int
+        "MealType":str,
+        "MaxPrepTime":int
     }
     if not CheckRequestFormat(request, requiredfields, optionalfields):
         return {"Error": FormatErrorMessage(requiredfields, optionalfields)}
     if "username" in request:
-        view.SetUserIngredients(session, request["username"], request["ingredients"])
-    return view.GetRecipes(session, request["ingredients"], \
-        request["meal_type"] if "meal_type" in request else None, \
-        request["prepTime"] if "prepTime" in request else None)
+        view.SetUserIngredients(session, request["username"], request["Ingredients"])
+    return view.GetRecipes(session, request["Ingredients"], \
+        request["MealType"] if "MealType" in request else None, \
+        request["MaxPrepTime"] if "MaxPrepTime" in request else None)
 
 #Get recipe by name
 #output - recipe (dict)
 def GetRecipe(session, request):
     requiredfields = {
-        "name":str,
+        "RecipeName":str,
     }
     if not CheckRequestFormat(request, requiredfields, optionalfields):
         return {"Error": FormatErrorMessage(requiredfields, optionalfields)}
