@@ -21,19 +21,19 @@ def app_entrypoint():
     return render_template('app.jinja2')
 
 @app.route('/GetAllIngredients')
-def app_entrypoint():
+def GetAllIngredients():
     return access.GetAllIngredients(session)
 
 @app.route('/GetAllMealTypes')
-def app_entrypoint():
+def GetAllMealTypes():
     return access.GetMealTypes(session)
 
 @app.route('/GetRecipeByFilter')
-def app_entrypoint():
+def GetRecipeByFilter():
     return access.GetRecipes(session, request)
 
 @app.route('/GetRecipeById')
-def app_entrypoint():
+def GetRecipeById():
     return access.GetRecipe(session, request)
 
 if __name__ == '__main__':
