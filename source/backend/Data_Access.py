@@ -95,7 +95,7 @@ def CreateIngredients(session, request):
 def CreateRecipe(session, request):
     requiredfields = {
         "RecipeName":str,
-        "steps":str,
+        "Steps":list,
         "MealType":str,
         "PrepTime":int,
         "Ingredients":list,
@@ -158,9 +158,9 @@ def GetRecipe(session, request):
     requiredfields = {
         "RecipeName":str,
     }
-    if not CheckRequestFormat(request, requiredfields, optionalfields):
-        return {"Error": FormatErrorMessage(requiredfields, optionalfields)}
-    return view.GetRecipe(session, request["name"])
+    if not CheckRequestFormat(request, requiredfields, None):
+        return {"Error": FormatErrorMessage(requiredfields, None)}
+    return view.GetRecipe(session, request["RecipeName"])
 
 #Get all meal types
 #output - list of meal types (strings)

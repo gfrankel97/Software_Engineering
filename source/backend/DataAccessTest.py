@@ -16,7 +16,7 @@ access.CreateRecipe(session, {
 		"ingredient_two",
 		"ingredient_three"
 	],
-	"steps":"instructions",
+	"Steps": ["instructions"],
 	"MealType":"MealType_one",
 	"PrepTime":1,
 })
@@ -26,7 +26,7 @@ access.CreateRecipe(session, {
 		"ingredient_three",
 		"ingredient_four"
 	],
-	"steps":"instructions",
+	"Steps": ["instructions", "instructions2"],
 	"MealType":"MealType_two",
 	"PrepTime":1,
 })
@@ -36,7 +36,7 @@ access.CreateRecipe(session, {
 		"ingredient_four",
 		"ingredient_five"
 	],
-	"steps":"instructions",
+	"Steps": ["instructions", "instructions2", "instructions3"],
 	"MealType":"MealType_one",
 	"PrepTime":3,
 })
@@ -47,7 +47,7 @@ access.CreateRecipe(session, {
 		"ingredient_two",
 		"ingredient_three"
 	],
-	"steps":"instructions",
+	"Steps": ["instructions", "instructions2", "instructions3", "instructions4"],
 	"MealType":"MealType_one",
 	"PrepTime":2,
 })
@@ -154,3 +154,8 @@ print(len(recipes_with_ingredients) == 1)
 print("\nMEAL TYPES TEST")
 MealTypes = access.GetMealTypes(session)
 print(len(MealTypes) == 2)
+
+
+print("STEPS TEST")
+recipe_with_steps = access.GetRecipe(session, {"RecipeName":"recipe_four"})
+print(4 in recipe_with_steps["Steps"])

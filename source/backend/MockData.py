@@ -52,7 +52,7 @@ for ingredientMap in ingredientMaps:
 		"MealType": "MealType_" + str(currentMealType),
 		"PrepTime": currentPrepTime,
 		"Ingredients": ingredients,
-		"steps" : "instructions"
+		"Steps" : ["Step 1", "Step 2", "Step 3"]
 	}
 	access.CreateRecipe(session, recipe)
 	currentMealType += 1

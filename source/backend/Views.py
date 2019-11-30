@@ -1,4 +1,4 @@
-from Models import User, Recipe, Ingredient
+from Models import User, Recipe, Ingredient, Step
 
 printErrors = False
 
@@ -36,6 +36,10 @@ def CreateIngredient(session, _name):
     session.add(new_ingredient)
     return SafeCommit(session, new_ingredient)
 
+def CreateStep(session, _instructions, _order, _recipe):
+    new_step = Step(instructions = _instructions, order = _order, Recipe = _recipe.name)
+    session.add(new_step)
+    return SafeCommit(session, new_step)
 #Create Recipe
 #Creates a new Recipe and adds it to the Recipe Table
 #Adds ingredients that don't yet exist in the Ingredient table
@@ -45,13 +49,17 @@ def CreateIngredient(session, _name):
 def CreateRecipe(session, recipe):
     new_recipe = Recipe(
         name = recipe["RecipeName"],
-        instructions=recipe["steps"],
         MealType=recipe["MealType"],
         PrepTime=recipe["PrepTime"],
-        Ingredients=[]
+        Ingredients=[],
+        Steps=[]
     )
     for ingredientName in recipe["Ingredients"]:
         new_recipe.Ingredients.append(GetIngredientByName(session, ingredientName))
+    currentOrder = 1
+    for step in recipe["Steps"]:
+        new_recipe.Steps.append(Step(order = currentOrder, instructions = step))
+        currentOrder += 1
     session.add(new_recipe)
     return SafeCommit(session, new_recipe)
 
@@ -153,7 +161,7 @@ def GetRecipes(session, ingredients, meal_type, prep_time):
 #recipeName - recipe name (string)
 #output - recipe (dict)
 def GetRecipe(session, recipeName):
-    return session.query(Recipe).filter(name == recipeName).first().to_dict()
+    return session.query(Recipe).filter(Recipe.name == recipeName).first().to_dict()
 
 #Get all meal types
 #output - list of meal types (strings)

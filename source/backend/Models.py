@@ -38,18 +38,27 @@ class User(Base):
 			"password":self.password
 		}
 
+class Step(Base):
+	__tablename__ = 'step'
+	id = Column(Integer, primary_key=True)
+	instructions = Column(String)
+	order = Column(Integer)
+	Recipe = Column(String, ForeignKey('recipe.name'))
+
+	def to_str(self):
+		return self.instructions
+
 class Recipe(Base):
 	__tablename__ = 'recipe'
 	name = Column(String, primary_key=True)
-	instructions = Column(String)
 	MealType = Column(String)
 	PrepTime = Column(Integer)
 	Ingredients = relationship("Ingredient", secondary=recipe_ingredient_table)
-	
+	Steps = relationship("Step")
+
 	def to_dict(self):
 		toReturn = {
 			"RecipeName":self.name,
-			"steps":self.instructions,
 			"MealType":self.MealType,
 			"PrepTime":self.PrepTime
 		}
@@ -57,6 +66,10 @@ class Recipe(Base):
 		for ingredient in self.Ingredients:
 			ingredientsList.append(ingredient.to_str())
 		toReturn["Ingredients"] = ingredientsList
+		stepsDict = {}
+		for step in self.Steps:
+			stepsDict[step.order] = step.to_str()
+		toReturn["Steps"] = stepsDict
 		return toReturn
 	
 	def searchresult_dict(self):
