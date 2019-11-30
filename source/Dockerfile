@@ -34,7 +34,8 @@ COPY --from=build /app/dist /app/backend/templates/html
 ##-----Install Python application requirements
 RUN pip3 install Flask && \
     pip3 install -U flask-cors && \
-    pip3 install SQLAlchemy
+    pip3 install SQLAlchemy && \
+    pip3 install pprint
 
 WORKDIR /app/backend
 

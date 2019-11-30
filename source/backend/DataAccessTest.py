@@ -158,4 +158,4 @@ print(len(MealTypes) == 2)
 
 print("STEPS TEST")
 recipe_with_steps = access.GetRecipe(session, {"RecipeName":"recipe_four"})
-print(4 in recipe_with_steps["Steps"])
+print(len(recipe_with_steps["Steps"]) == 4)

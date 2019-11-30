@@ -1,5 +1,6 @@
 from DB_Engine import session
 import Data_Access as access
+import pprint
 
 
 ingredientMaps = [
@@ -62,12 +63,20 @@ for ingredientMap in ingredientMaps:
 	if currentPrepTime > maxpreptime:
 		currentPrepTime = 1
 
+pp = pprint.PrettyPrinter(indent=4)
+
+
 print("Mock Test Data")
 print("GetAllMealTypes:")
 print(access.GetMealTypes(session))
 print("GetAllIngredients:")
 print(access.GetAllIngredients(session))
-print("Get All Recipes:")
-print(access.GetRecipes(session, {
+recipes = access.GetRecipes(session, {
 	"Ingredients": ingredients
-}))
+}) 
+print("Get All RecipeResults:")
+pp.pprint(recipes)
+print("\n\nEach Recipe Obj:")
+for recipe in recipes:
+	print("\nGet by " + recipe["RecipeName"] + ":")
+	pp.pprint(access.GetRecipe(session, {"RecipeName": recipe["RecipeName"]}))

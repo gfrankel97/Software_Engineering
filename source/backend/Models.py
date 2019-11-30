@@ -45,8 +45,11 @@ class Step(Base):
 	order = Column(Integer)
 	Recipe = Column(String, ForeignKey('recipe.name'))
 
-	def to_str(self):
-		return self.instructions
+	def to_dict(self):
+		return {
+			"Step": self.instructions,
+			"Order": self.order
+		}
 
 class Recipe(Base):
 	__tablename__ = 'recipe'
@@ -66,10 +69,10 @@ class Recipe(Base):
 		for ingredient in self.Ingredients:
 			ingredientsList.append(ingredient.to_str())
 		toReturn["Ingredients"] = ingredientsList
-		stepsDict = {}
+		stepsList = []
 		for step in self.Steps:
-			stepsDict[step.order] = step.to_str()
-		toReturn["Steps"] = stepsDict
+			stepsList.append(step.to_dict())
+		toReturn["Steps"] = stepsList
 		return toReturn
 	
 	def searchresult_dict(self):

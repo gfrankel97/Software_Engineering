@@ -109,4 +109,4 @@ print(len(meal_types) == 2)
 
 print("STEPS TEST")
 recipe_with_steps = view.GetRecipe(session, "recipe_four")
-print(4 in recipe_with_steps["Steps"])
+print(len(recipe_with_steps["Steps"]) == 4)
