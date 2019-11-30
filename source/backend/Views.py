@@ -90,7 +90,6 @@ def GetIngredientByName(session, ingredientName):
     if ingredient is not None:
         return ingredient
     else:
-        print("Create ingredient in get: " + ingredientName)
         return CreateIngredient(session, ingredientName)
 
 #Set a user's ingredients
