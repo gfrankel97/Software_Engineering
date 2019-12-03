@@ -56,6 +56,7 @@
     </button>
   </mat-card>
 
+  <!-- listed ingredients box -->
   <div class="ingredientList">
     <mat-grid-list cols="8" rowHeight="4:1">
       <mat-grid-tile *ngFor="let ingredient of cloneIngredients">
@@ -72,13 +73,13 @@
 <mat-card style="margin: 10px 10px; min-height: 63%;">
 
   <mat-grid-list cols="4" rowHeight="4:1">
-      <mat-grid-tile *ngFor="let recipe of recipes">
-        <mat-card class="recipe" (click)="openDialog(recipe)">
+      <mat-grid-tile *ngFor="let recipeResult of recipeResults">
+        <mat-card class="recipeResults" (click)="openDialog(recipeResult)">
           <h5 style="font-size: 17px;font-weight: 500;margin-bottom: 16px !important;margin: 5px;">
-            {{ recipe.name }}
+            {{ recipeResult.name }}
           </h5>
           <footer style="text-align: end;">
-            Prep Time: {{ recipe.prepTime }} minutes
+            Prep Time: {{ recipeResult.prepTime }} minutes
           </footer>
         </mat-card>
       </mat-grid-tile>

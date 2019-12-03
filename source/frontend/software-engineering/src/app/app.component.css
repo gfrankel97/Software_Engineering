@@ -17,7 +17,7 @@
     height: 60% !important;
 }
 
-.recipe {
+.recipeResults {
   margin: 5px;
   padding: 15px;
   background-color: rgb(121, 185, 211);
@@ -26,7 +26,7 @@
   color: black;
 }
 
-.recipe:hover {
+.recipeResults:hover {
   background: green !important;
 }
 

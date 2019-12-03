@@ -14,6 +14,7 @@ import { MatCardModule, MatFormFieldModule,
           MatDialogModule } from '@angular/material';
 
 import { RecipeDialogComponent } from './components/recipe-dialog/recipe-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RecipeDialogComponent } from './components/recipe-dialog/recipe-dialog.
 
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
     BrowserModule,
     AppRoutingModule,
