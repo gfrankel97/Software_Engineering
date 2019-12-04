@@ -9,7 +9,6 @@ import { Recipe } from '../../core/models/Recipe';
   styleUrls: ['./recipe-dialog.component.css']
 })
 export class RecipeDialogComponent {
-  testRecipe: Recipe;
 
   constructor(
     public dialogRef: MatDialogRef<RecipeDialogComponent>,
@@ -19,5 +18,4 @@ export class RecipeDialogComponent {
     console.log(this.recipe);
     this.dialogRef.close();
   }
-
 }

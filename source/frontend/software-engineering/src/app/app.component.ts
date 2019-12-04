@@ -154,7 +154,8 @@ export class AppComponent implements OnInit {
         recipeName: this.recipe.recipeName, 
         ingredients: this.recipe.ingredients,
         steps: this.recipe.steps,
-        prepTime: this.recipe.prepTime  
+        prepTime: this.recipe.prepTime,
+        mealType: this.recipe.mealType
       }
     });
   }
