@@ -52,7 +52,8 @@ export class AppComponent implements OnInit {
     this.homeService.getAllIngredients().subscribe(
       res => {
         if (res) {
-          this.ingredientsString = res as Array<string>
+          console.log(res)
+          this.ingredientsString = res['response'] as Array<string>
 
           this.ingredientsString.forEach(i => this.ingredients.push({name: i, selected: false}))
           this.cloneIngredients = this.ingredients;
@@ -66,8 +67,9 @@ export class AppComponent implements OnInit {
   getMealTypes() {
     this.homeService.getAllMealTypes().subscribe(
       res => {
+        console.log(res)
         if (res) {
-          this.mealTypes = res;
+          this.mealTypes = res['response'];
         } else {
           console.log('fuck bruh the meal types doesnt work');
         }
