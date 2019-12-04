@@ -6,13 +6,16 @@ from flask_cors import CORS, cross_origin
 import Data_Access as access
 import RealData
 from DB_Engine import session
+import pprint
 
 
 app = Flask(__name__)
 CORS(app)
 
+pp = pprint.PrettyPrinter(indent=4)
+
 def Response(response):
-    return {"response": response} 
+    return {"response": response}
 
 #serve static files
 @app.route('/<path:path>', methods=['GET'])
@@ -34,10 +37,12 @@ def GetAllMealTypes():
 
 @app.route('/GetRecipeByFilter')
 def GetRecipeByFilter():
+    pp.pprint('GetRecipeById ' + request)
     return Response(access.GetRecipes(session, request))
 
 @app.route('/GetRecipeById')
 def GetRecipeById():
+    pp.pprint('GetRecipeById ' + request)
     return Response(access.GetRecipe(session, request))
 
 if __name__ == '__main__':

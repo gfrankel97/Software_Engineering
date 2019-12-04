@@ -10,10 +10,6 @@ def FormatString(stringToFormat):
 
 
 with open('recipes.csv', 'r') as csv_file:
-    if "".isspace():
-        print("isspace")
-    if not "":
-        print("is false")
     csv_reader = csv.reader(csv_file, delimiter =',')
     firstline = True
     for line in csv_reader:
@@ -23,7 +19,7 @@ with open('recipes.csv', 'r') as csv_file:
         recipeName = FormatString(line[0])
         if recipeName is None or recipeName.isspace() or not recipeName or recipeName == "":
             continue
-        print("GETTING RECIPE: " + recipeName)
+        #print("GETTING RECIPE: " + recipeName)
         ingredients = []
         i = 4
         while (i<59):
@@ -64,28 +60,28 @@ with open('recipes.csv', 'r') as csv_file:
             "PrepTime": currentPrepTime,
             "Ingredients": ingredients,
             "Steps" : steps
-        } 
+        }
         #for item in recipe.items():
         #    print("key: " + item[0] + " valuetype: " + str(type(item[1])))
-        print("ADDING RECIPE: " + recipeName)
+        #print("ADDING RECIPE: " + recipeName)
         access.CreateRecipe(session, recipe)
 
 
 
 
-pp = pprint.PrettyPrinter(indent=4)
-print("Data")
-print("GetAllMealTypes:")
-print(access.GetMealTypes(session))
-print("GetAllIngredients:")
-ingredients = access.GetAllIngredients(session)
-print(ingredients)
-recipes = access.GetRecipes(session, {
-	"Ingredients": ingredients
-}) 
-print("Get All RecipeResults:")
-pp.pprint(recipes)
-print("\n\nEach Recipe Obj:")
-for recipe in recipes:
-	print("\nGet by " + recipe["RecipeName"] + ":")
-	pp.pprint(access.GetRecipe(session, {"RecipeName": recipe["RecipeName"]}))
+#pp = pprint.PrettyPrinter(indent=4)
+#print("Data")
+#print("GetAllMealTypes:")
+#print(access.GetMealTypes(session))
+#print("GetAllIngredients:")
+#ingredients = access.GetAllIngredients(session)
+#print(ingredients)
+#recipes = access.GetRecipes(session, {
+#	"Ingredients": ingredients
+#})
+#print("Get All RecipeResults:")
+#pp.pprint(recipes)
+#print("\n\nEach Recipe Obj:")
+#for recipe in recipes:
+#	print("\nGet by " + recipe["RecipeName"] + ":")
+#	pp.pprint(access.GetRecipe(session, {"RecipeName": recipe["RecipeName"]}))
