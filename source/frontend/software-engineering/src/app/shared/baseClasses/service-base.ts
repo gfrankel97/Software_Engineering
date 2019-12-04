@@ -11,6 +11,7 @@ export class ServiceBase {
   constructor(http: HttpClient) {
     this._http = http;
     this.apiUrl = 'https://pantry-to-table.azurewebsites.net/'
+    // this.apiUrl = 'http://localhost:5000'
     this.headers = new HttpHeaders(
       { 'Access-Control-Allow-Origin': ['https://pantry-to-table.azurewebsites.net/'] }
     );

@@ -5,11 +5,14 @@ from flask_cors import CORS, cross_origin
 
 import Data_Access as access
 import MockData
+from DB_Engine import session
 
 
 app = Flask(__name__)
 CORS(app)
 
+def Response(response):
+    return {"response": response} 
 
 #serve static files
 @app.route('/<path:path>', methods=['GET'])
@@ -23,19 +26,19 @@ def app_entrypoint():
 
 @app.route('/GetAllIngredients')
 def GetAllIngredients():
-    return access.GetAllIngredients(session)
+    return Response(access.GetAllIngredients(session))
 
 @app.route('/GetAllMealTypes')
 def GetAllMealTypes():
-    return access.GetMealTypes(session)
+    return Response(access.GetMealTypes(session))
 
 @app.route('/GetRecipeByFilter')
 def GetRecipeByFilter():
-    return access.GetRecipes(session, request)
+    return Response(access.GetRecipes(session, request))
 
 @app.route('/GetRecipeById')
 def GetRecipeById():
-    return access.GetRecipe(session, request)
+    return Response(access.GetRecipe(session, request))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
