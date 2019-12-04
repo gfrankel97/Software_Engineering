@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
   constructor(public dialog: MatDialog, private homeService: HomeService) {}
   
   ngOnInit() {
-    // this.getIngredients();
-    // this.getMealTypes();
+    this.getIngredients();
+    this.getMealTypes();
 
-    this.getIngredientsTest();
+    // this.getIngredientsTest();
   } 
 
   // actual api call to be used
