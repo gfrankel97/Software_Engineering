@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   mealTypes: Array<string>;
 
   //search variables
-  ingredients: Ingredient[];
+  ingredients: Ingredient[] = [];
   selectedMealType: string;
   maxPrepTime: number = 120;
   
@@ -34,9 +34,11 @@ export class AppComponent implements OnInit {
   selectedIngredients: Ingredient[];
   isOnlyShowSelected: boolean = false;
   
+  recipe: Recipe = new Recipe();
+
   //WHAT IS THIS?
-  animal: string;
-  name: string;
+  // animal: string;
+  // name: string;
 
   constructor(public dialog: MatDialog, private homeService: HomeService) {}
   
@@ -44,7 +46,8 @@ export class AppComponent implements OnInit {
     this.getIngredients();
     this.getMealTypes();
 
-    // this.getIngredientsTest();
+    // for testing
+    //this.getIngredientsTest();
   } 
 
   // actual api call to be used
@@ -52,7 +55,8 @@ export class AppComponent implements OnInit {
     this.homeService.getAllIngredients().subscribe(
       res => {
         if (res) {
-          this.ingredientsString = res as Array<string>
+          console.log(res)
+          this.ingredientsString = res['response'] as Array<string>
 
           this.ingredientsString.forEach(i => this.ingredients.push({name: i, selected: false}))
           this.cloneIngredients = this.ingredients;
@@ -67,22 +71,15 @@ export class AppComponent implements OnInit {
     this.homeService.getAllMealTypes().subscribe(
       res => {
         if (res) {
-          this.mealTypes = res;
+          console.log(res);
+          this.mealTypes = res['response'];
         } else {
           console.log('fuck bruh the meal types doesnt work');
         }
       }
     )
   }
-
-  //open the dialog and send the information to the component through "data"
-  openDialog(recipe: RecipeResult): void {
-    console.log(recipe);
-    this.dialog.open(RecipeDialogComponent, {
-      data: { name: recipe.recipeName, prepTime: recipe.prepTime }
-    });
-  }
-
+  
   onClearSearchValue() {
     //clear out searchValue
     this.searchValue = '';
@@ -93,7 +90,8 @@ export class AppComponent implements OnInit {
   }
 
   onRecipeSearch() {
-    // this.getRecipes();
+    //uses mock recipes while apis aren't ready
+    // this.getMockRecipes();
 
     //need selected ingredients, mealType, and maxPrepTime
     let recipeSearchParam: RecipeSearch = new RecipeSearch();
@@ -101,18 +99,19 @@ export class AppComponent implements OnInit {
     // recipeSearchParam.ingredients = this.selectedIngredients
     recipeSearchParam.maxPrepTime = this.maxPrepTime;
     recipeSearchParam.mealType = this.selectedMealType ? this.selectedMealType : '';
-
+    
+    console.log(recipeSearchParam);
     this.homeService.getRecipeByFilter(recipeSearchParam).subscribe(
       res => {
         if (res) {
-          this.recipeResults = res as Array<RecipeResult>;
+          this.recipeResults = res['response'] as Array<RecipeResult>;
         } else {
-          console.log('onRecipeSearch hasnt didnt work');
+          console.log('onRecipeSearch didnt work');
         }
       }
     )
   }
-
+  
   onSearchIngredient(searchValue: string) {
     //clear current list
     this.cloneIngredients = [];
@@ -135,6 +134,62 @@ export class AppComponent implements OnInit {
       this.cloneIngredients = tmp;
       this.isOnlyShowSelected = true;
     }
+  }
+  
+  //open the dialog and send the information to the component through "data"
+  openDialog(recipeResult: RecipeResult): void {
+    console.log(recipeResult);
+    
+    //TODO: uncomment api call - probably doesn't work 
+    this.getRecipeById(recipeResult.recipeName);
+
+    //TODO: comment this mock method out when api is set up
+    // this.mockGetRecipeById(recipeResult);
+
+    console.log('about to call dialogopen');
+    console.log(this.recipe);
+
+    this.dialog.open(RecipeDialogComponent, {
+      data: { 
+        recipeName: this.recipe.recipeName, 
+        ingredients: this.recipe.ingredients,
+        steps: this.recipe.steps,
+        prepTime: this.recipe.prepTime  
+      }
+    });
+  }
+  
+  //api call for recipe
+  getRecipeById(recipeName: string) {
+    this.recipe = new Recipe();
+    this.homeService.getRecipeById(recipeName).subscribe(
+      res => {
+        if (res) {
+          console.log(res);
+          this.recipe = res['response'];
+        } else {
+          console.log('no go on the getrecipebyid... string: ' + recipeName);
+        }
+      }
+    )
+  }
+
+  mockGetRecipeById(recipeResult: RecipeResult) {
+    this.recipe.recipeName = recipeResult.recipeName;
+    this.recipe.prepTime = recipeResult.prepTime;
+    this.recipe.mealType = recipeResult.mealType;
+    this.recipe.ingredients = ['IngredientName1', 'IngredientName2', 'IngredientName3', 'IngredientName4', 'IngredientName5', 'IngredientName6', 'IngredientName7'];
+    this.recipe.steps = [
+      'This is a sentence to fullfill the step 1',
+      'This is a sentence to fullfill the step 2',
+      'This is a sentence to fullfill the step 3',
+      'This is a sentence to fullfill the step 4',
+      'This is a sentence to fullfill the step 5',
+      'This is a sentence to fullfill the step 6',
+      'This is a sentence to fullfill the step 7',
+      'This is a sentence to fullfill the step 8',
+      'This is a sentence to fullfill the step 9'
+    ];
   }
 
   //get ingredients when page is initialized

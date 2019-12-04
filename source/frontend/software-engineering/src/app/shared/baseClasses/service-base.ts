@@ -7,7 +7,6 @@ export class ServiceBase {
   protected apiUrl: string;
   public headers: HttpHeaders;
 
-  //TODO: Where is this apiUrl
   constructor(http: HttpClient) {
     this._http = http;
     this.apiUrl = 'https://pantry-to-table.azurewebsites.net/'
@@ -20,7 +19,7 @@ export class ServiceBase {
     this.headers.get('');
   }
 
-  public post<T>(url: string, body: T): Observable<any> {
+  public getWithParams<T>(url: string, body: T): Observable<any> {
     return this._http.post(this.apiUrl + url, body, {
       headers: this.headers,
       withCredentials: true
