@@ -19,22 +19,22 @@ export class HomeService extends ServiceBase {
 
   //gets all ingredients when app opens
   getAllIngredients(): Observable<string[]> {
-    return this.get('GetAllIngredients');
+    return this.get('GetAllIngredients')['response'];
   }
 
   //gets all mealtypes when app opens
   getAllMealTypes(): Observable<string[]> {
-    return this.get('GetAllMealTypes');
+    return this.get('GetAllMealTypes')['response'];
   }
 
   //TODO: this needs to send a recipeSearch
   getRecipeByFilter(recipeSearch: RecipeSearch): Observable<RecipeResult[]> {
     // return this.get('GetRecipeByFilter', recipeSearch);
-    return this.get('GetRecipeByFilter');
+    return this.get('GetRecipeByFilter')['response'];
   }
 
   getRecipeById(recipeName: string): Observable<Recipe[]> {
     // return this.get('GetRecipeById', recipeName);
-    return this.get('GetRecipeById');
+    return this.get('GetRecipeById')['response'];
   }
 }
