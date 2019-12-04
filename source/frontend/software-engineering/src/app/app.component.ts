@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   //search variables
   ingredients: Ingredient[] = [];
   selectedMealType: string;
-  maxPrepTime: number = 120;
+  maxPrepTime: number = 300;
   
   recipeResults: Array<RecipeResult>;
 
@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
   
   recipe: Recipe = new Recipe();
 
+  isProd: boolean = true;
+
   //WHAT IS THIS?
   // animal: string;
   // name: string;
@@ -43,11 +45,13 @@ export class AppComponent implements OnInit {
   constructor(public dialog: MatDialog, private homeService: HomeService) {}
   
   ngOnInit() {
-    this.getIngredients();
-    this.getMealTypes();
-
-    // for testing
-    //this.getIngredientsTest();
+    if (this.isProd) {
+      this.getIngredients();
+      this.getMealTypes();
+    } else {
+      this.getIngredientsTest();
+      this.getMockMealTypes();
+    }
   } 
 
   // actual api call to be used
@@ -97,8 +101,14 @@ export class AppComponent implements OnInit {
     let recipeSearchParam: RecipeSearch = new RecipeSearch();
     
     // recipeSearchParam.ingredients = this.selectedIngredients
-    recipeSearchParam.maxPrepTime = this.maxPrepTime;
+    recipeSearchParam.maxPrepTime = this.maxPrepTime ? this.maxPrepTime : 300;
     recipeSearchParam.mealType = this.selectedMealType ? this.selectedMealType : '';
+    recipeSearchParam.ingredients = [];
+    this.ingredients.forEach(i => {
+      if (i.selected) {
+        recipeSearchParam.ingredients.push(i.name)
+      } 
+    });
     
     console.log(recipeSearchParam);
     this.homeService.getRecipeByFilter(recipeSearchParam).subscribe(
@@ -229,6 +239,16 @@ export class AppComponent implements OnInit {
     { mealType: 'blah', prepTime: 20, recipeName: 'Southwestern Salmon & Black Beans'},
     { mealType: 'blah', prepTime: 20, recipeName: 'Spicy Asian Shrimp'},
     { mealType: 'blah', prepTime: 20, recipeName: 'Steamed Salmon and Asparagus with Mustard Dill Sauce'}
+    ];
+  }
+
+  getMockMealTypes() {
+    this.mealTypes = [
+      'MealType1',
+      'MealType2',
+      'MealType3',
+      'MealType4',
+      'MealType5'
     ];
   }
 

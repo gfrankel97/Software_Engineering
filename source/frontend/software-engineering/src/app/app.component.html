@@ -34,7 +34,9 @@
     <!-- select meal type -->
     <mat-form-field style="margin-top: -3px;margin-bottom: -20px;margin-left: 2.5%;width: 15%;">
       <mat-select [(ngModel)]="selectedMealType" placeholder="Select Meal Type">
-        <mat-option *ngFor="let mealType of mealTypes" [value]="mealType">Option</mat-option>
+        <mat-option *ngFor="let mealType of mealTypes" [value]="mealType">
+          {{mealType}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
