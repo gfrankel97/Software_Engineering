@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
     this.homeService.getRecipeByFilter(recipeSearchParam).subscribe(
       res => {
         if (res) {
-          this.recipeResults = res as Array<RecipeResult>;
+          this.recipeResults = res['response'] as Array<RecipeResult>;
         } else {
           console.log('onRecipeSearch didnt work');
         }
