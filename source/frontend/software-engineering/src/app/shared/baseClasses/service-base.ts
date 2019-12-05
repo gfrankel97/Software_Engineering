@@ -11,13 +11,13 @@ export class ServiceBase {
     this._http = http;
     this.apiUrl = 'https://pantry-to-table.azurewebsites.net/';
     // this.apiUrl = 'http://localhost:5000/';
-    this.headers = new HttpHeaders();
-    // this.headers = new HttpHeaders(
-    //   { 'Access-Control-Allow-Origin': ['https://pantry-to-table.azurewebsites.net/'] }
-    // );
-    // this.headers = this.headers.set('Access-Control-Allow-Origin', 'https://pantry-to-table.azurewebsites.net/');
-    // this.headers = this.headers.set('Access-Control-Allow-Credentials', 'true');
-    // this.headers.get('');
+    // this.headers = new HttpHeaders();
+    this.headers = new HttpHeaders(
+      { 'Access-Control-Allow-Origin': ['https://pantry-to-table.azurewebsites.net/'] }
+    );
+    this.headers = this.headers.set('Access-Control-Allow-Origin', 'https://pantry-to-table.azurewebsites.net/');
+    this.headers = this.headers.set('Access-Control-Allow-Credentials', 'true');
+    this.headers.get('');
   }
 
   public getWithParams<T>(url: string, body: T): Observable<any> {
