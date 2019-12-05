@@ -28,12 +28,12 @@ export class HomeService extends ServiceBase {
   }
 
   //gets recipe results when user searches based off recipe search criteria
-  getRecipeByFilter(recipeSearch: RecipeSearch): Observable<RecipeResult[]> {
+  getRecipeByFilter(recipeSearch: RecipeSearch): Observable<any> {
     return this.getWithParams('GetRecipeByFilter', recipeSearch);
   }
 
   //gets full recipe information based off recipe name
-  getRecipeById(recipeName: string): Observable<Recipe[]> {
-    return this.getWithParams('GetRecipeById', recipeName);
+  getRecipeById(RecipeResult: RecipeResult): Observable<any> {
+    return this.getWithParams('GetRecipeById', RecipeResult);
   }
 }

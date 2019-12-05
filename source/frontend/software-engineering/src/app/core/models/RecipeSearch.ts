@@ -3,9 +3,9 @@ export class RecipeSearch {
     maxPrepTime: number;
     mealType: string;
 
-    constructor(input?: any) {
-        this.ingredients = input.ingredients ? input.ingredients : null;
-        this.maxPrepTime = input.maxPrepTime ? input.maxPrepTime : null;
-        this.mealType = input.mealType ? input.mealType : null;
+    constructor() {
+        this.ingredients = this.ingredients ? this.ingredients : [];
+        this.maxPrepTime = this.maxPrepTime ? this.maxPrepTime : null;
+        this.mealType = this.mealType ? this.mealType : null;
     }
 }

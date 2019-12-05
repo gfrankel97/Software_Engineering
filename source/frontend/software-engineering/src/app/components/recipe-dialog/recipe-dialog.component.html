@@ -1,5 +1,5 @@
 <h1 mat-dialog-title class="heading" id="betterFont" style="font-weight: 700; font-size: 28px; padding-left: 1%; padding-top: 1%; margin-bottom: 3px">{{recipe.recipeName}}</h1>
-<!-- <h2 mat-dialog-title class="heading" id="betterFont" style="padding-left: 1% ">Preperation Time: {{recipe.prepTime}} minutes</h2> -->
+<h2 mat-dialog-title class="heading" id="betterFont" style="padding-left: 1% ">Preperation Time: {{recipe.prepTime}} minutes</h2>
 
 <h3 class="heading" id="betterFont" style="padding-left: 1%; margin-bottom: 5px; text-decoration: underline;">Ingredients</h3>
 <mat-list role="list" id="betterFont" style="
@@ -11,7 +11,7 @@ padding-left: 1%
   <mat-list-item *ngFor="let ingredient of recipe.ingredients" role="listitem">
     {{ingredient}}
   </mat-list-item>
-</mat-list> 
+</mat-list>
 
 <!-- steps side of the dialog -->
 <div mat-dialog-content style="
@@ -26,11 +26,11 @@ padding-left: 4%;
 border-color: skyblue;
 ">
   <h3 class="heading" id="betterFont" style="margin-top: 17px; margin-bottom: 5px; text-decoration: underline;">Steps</h3>
-  <mat-list role="list">
+  <mat-list role="list" style="width: 90%;">
     <mat-list-item role="listitem" *ngFor="let step of recipe.steps">
       {{step}}
     </mat-list-item>
-  </mat-list>          
+  </mat-list>
 </div>
 
 <mat-dialog-actions style="

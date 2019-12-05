@@ -31,7 +31,7 @@ class User(Base):
 	username = Column(String, primary_key=True)
 	password = Column(String)
 	pantry = relationship("Ingredient", secondary=user_ingredient_table)
-	
+
 	def to_dict(self):
 		return {
 			"username":self.username,
@@ -50,6 +50,9 @@ class Step(Base):
 			"Step": self.instructions,
 			"Order": self.order
 		}
+
+	def to_str(self):
+		return self.instructions
 
 class Recipe(Base):
 	__tablename__ = 'recipe'
@@ -71,15 +74,15 @@ class Recipe(Base):
 		toReturn["Ingredients"] = ingredientsList
 		stepsList = []
 		for step in self.Steps:
-			stepsList.append(step.to_dict())
+			stepsList.append(step.to_str())
 		toReturn["Steps"] = stepsList
 		return toReturn
-	
+
 	def searchresult_dict(self):
 		return {
-			"RecipeName":self.name,
-			"MealType":self.MealType,
-			"PrepTime":self.PrepTime
+			"recipeName":self.name,
+			"mealType":self.MealType,
+			"prepTime":self.PrepTime
 		}
 
 #Create the tables in the db

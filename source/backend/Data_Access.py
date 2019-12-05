@@ -50,8 +50,8 @@ def CreateUser(session, request):
     if not CheckRequestFormat(request, requiredfields, None):
         return {"Error": FormatErrorMessage(requiredfields, None)}
     user = view.CreateUser(session, request["username"], request["password"])
-    return user.to_dict() if not isinstance(user, str) else {"Error": user} 
-    
+    return user.to_dict() if not isinstance(user, str) else {"Error": user}
+
 #Create Ingredient
 #Create an ingredient and add it to the Ingredient table
 #output - ingredient's name - string
@@ -62,13 +62,13 @@ def CreateIngredient(session, request):
     if not CheckRequestFormat(request, requiredfields, None):
         return {"Error": FormatErrorMessage(requiredfields, None)}
     ingredient = view.CreateIngredient(session, request["name"])
-    return ingredient.to_str() if not isinstance(ingredient, str) else {"Error": ingredient} 
-    
+    return ingredient.to_str() if not isinstance(ingredient, str) else {"Error": ingredient}
+
 #Create Ingredients
 #Creates multiple ingredients and adds them to the Ingredients table
 #output  - dict
 #   Ingredients     list of strings added successfully
-#   Errors          dict of ingredient names and errors encountered for that name 
+#   Errors          dict of ingredient names and errors encountered for that name
 def CreateIngredients(session, request):
     requiredfields = {
         "names": list #list of names (strings) of ingredients
@@ -85,12 +85,12 @@ def CreateIngredients(session, request):
             return_status["Ingredients"].append(ingredient.to_str())
         else:
             return_status["Errors"]["name"] = ingredient
-    return return_status 
+    return return_status
 
 #Create Recipe
 #Creates a new Recipe and adds it to the Recipe Table
 #Adds ingredients that don't yet exist in the Ingredient table
-#Adds RecipeIngredient relationship entires in the RecipeIngredient table 
+#Adds RecipeIngredient relationship entires in the RecipeIngredient table
 #output - new recipe - dict
 def CreateRecipe(session, request):
     requiredfields = {
@@ -118,7 +118,7 @@ def Login(session, request):
     return validation if not isinstance(validation, str) else {"Error": validation}
 
 #Get all ingredients
-#output - list of ingredients (strings) 
+#output - list of ingredients (strings)
 def GetAllIngredients(session):
     return view.GetAllIngredients(session)
 
@@ -137,30 +137,30 @@ def GetUserIngredients(session, request):
 #output - list of recipes (dictionaries)
 def GetRecipes(session, request):
     requiredfields = {
-        "Ingredients":list,
+        "ingredients":list,
     }
     optionalfields = {
         "username":str,
-        "MealType":str,
-        "MaxPrepTime":int
+        "mealType":str,
+        "maxPrepTime":int
     }
     if not CheckRequestFormat(request, requiredfields, optionalfields):
         return {"Error": FormatErrorMessage(requiredfields, optionalfields)}
     if "username" in request:
-        view.SetUserIngredients(session, request["username"], request["Ingredients"])
-    return view.GetRecipes(session, request["Ingredients"], \
-        request["MealType"] if "MealType" in request else None, \
-        request["MaxPrepTime"] if "MaxPrepTime" in request else None)
+        view.SetUserIngredients(session, request["username"], request["ingredients"])
+    return view.GetRecipes(session, request["ingredients"], \
+        request["mealType"] if "mealType" in request  else None, \
+        request["maxPrepTime"] if "maxPrepTime" in request else None)
 
 #Get recipe by name
 #output - recipe (dict)
 def GetRecipe(session, request):
     requiredfields = {
-        "RecipeName":str,
+        "recipeName":str,
     }
     if not CheckRequestFormat(request, requiredfields, None):
         return {"Error": FormatErrorMessage(requiredfields, None)}
-    return view.GetRecipe(session, request["RecipeName"])
+    return view.GetRecipe(session, request["recipeName"])
 
 #Get all meal types
 #output - list of meal types (strings)

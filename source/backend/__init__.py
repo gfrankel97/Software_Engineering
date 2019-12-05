@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 from flask_cors import CORS, cross_origin
 
 import Data_Access as access
@@ -35,15 +35,20 @@ def GetAllIngredients():
 def GetAllMealTypes():
     return Response(access.GetMealTypes(session))
 
-@app.route('/GetRecipeByFilter')
+@app.route('/GetRecipeByFilter', methods=["POST"])
 def GetRecipeByFilter():
-    pp.pprint('GetRecipeById ' + request)
-    return Response(access.GetRecipes(session, request))
+    pp.pprint(request.get_json())
+    toReturn = Response(access.GetRecipes(session, request.get_json()))
+    pp.pprint(toReturn)
+    return toReturn
 
-@app.route('/GetRecipeById')
+@app.route('/GetRecipeById', methods=["POST"])
 def GetRecipeById():
-    pp.pprint('GetRecipeById ' + request)
-    return Response(access.GetRecipe(session, request))
+    pp.pprint(request)
+    pp.pprint(request.get_json())
+    toReturn = Response(access.GetRecipe(session, request.get_json()))
+    pp.pprint(toReturn)
+    return toReturn
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

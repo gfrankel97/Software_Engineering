@@ -26,7 +26,7 @@ def CreateUser(session, _username, _password):
     new_user = User(username = _username, password = _password)
     session.add(new_user)
     return SafeCommit(session, new_user)
-    
+
 #Create Ingredient
 #Create an ingredient and add it to the Ingredient table
 #_name - string
@@ -43,7 +43,7 @@ def CreateStep(session, _instructions, _order, _recipe):
 #Create Recipe
 #Creates a new Recipe and adds it to the Recipe Table
 #Adds ingredients that don't yet exist in the Ingredient table
-#Adds RecipeIngredient relationship entires in the RecipeIngredient table 
+#Adds RecipeIngredient relationship entires in the RecipeIngredient table
 #recipe - dict corrsponding to recipe requirements
 #output - new recipe - Recipe Model
 def CreateRecipe(session, recipe):
@@ -83,7 +83,7 @@ def Login(session, username, password):
         return validation != None
 
 #Get all ingredients
-#output - list of ingredients (strings) 
+#output - list of ingredients (strings)
 def GetAllIngredients(session):
     ingredientsList = []
     for ingredient in session.query(Ingredient).all():
@@ -131,10 +131,10 @@ def GetUserIngredients(session, username):
 #output - list of recipe dictionaries
 def GetRecipes(session, ingredients, meal_type, prep_time):
     recipes_with_ingredients = []
-    recipes = None 
+    recipes = None
     try:
         recipes = session.query(Recipe)
-        if meal_type is not None:
+        if meal_type is not None and meal_type != "":
             recipes = recipes.filter(Recipe.MealType == meal_type)
         if prep_time is not None:
             recipes = recipes.filter(Recipe.PrepTime <= prep_time)
